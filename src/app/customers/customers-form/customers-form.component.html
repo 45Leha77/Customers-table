@@ -1,0 +1,63 @@
+<form
+  class="create-page__form form"
+  [formGroup]="form"
+  (ngSubmit)="onFormSubmit($event)"
+  fxLayout="column"
+  fxLayoutGap="10px"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-hint>Example: test@gmail.com</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Customer TID</mat-label>
+    <input matInput formControlName="customerTID" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Contact name</mat-label>
+    <input matInput formControlName="contactName" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Contact telephone</mat-label>
+    <input matInput formControlName="contactTelephone" />
+    <mat-hint>Example: +000000000000</mat-hint>
+  </mat-form-field>
+  <div class="form__softwares softwares-form" fxLayout="row" fxLayoutGap="20px">
+    <button
+      mat-raised-button
+      type="button"
+      class="softwares-form__button"
+      fxFlexAlign="center"
+      (click)="addSoftware(+softwaresInput.value)"
+    >
+      Add software
+    </button>
+    <mat-slider
+      thumbLabel
+      tickInterval="1000"
+      step="1"
+      min="1"
+      max="10"
+      #softwaresInput
+    ></mat-slider>
+    <div fxLayout="column">
+      <h2>Added softwares</h2>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <span *ngFor="let software of softwareIds">{{ software }}</span>
+      </div>
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    color="accent"
+    type="submit"
+    [disabled]="!form.valid || softwareIds.length < 1"
+  >
+    Apply
+  </button>
+</form>

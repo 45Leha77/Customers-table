@@ -1,0 +1,9 @@
+<section class="create-page">
+  <div class="create-page__container">
+    <button mat-raised-button color="accent" routerLink="../">Back</button>
+    <h1 class="create-page__title">Creating customer</h1>
+    <app-customers-form
+      (submit)="onCustomersFormSubmit($event)"
+    ></app-customers-form>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+.table-customers-page {
+  width: 100%;
+  mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  &__element-row {
+    td {
+      border-bottom-width: 0;
+    }
+  }
+
+  &__detail-row {
+    height: 0;
+  }
+}
+
+.details {
+  overflow: hidden;
+  &__elements {
+    padding: 20px;
+  }
+
+  &__element {
+    border: 1px solid black;
+    padding: 10px;
+  }
+}

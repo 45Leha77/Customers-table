@@ -1,0 +1,169 @@
+<div class="customers-page__controls" fxLayout="row">
+  <mat-form-field appearance="standard" fxFlex="grow">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input />
+  </mat-form-field>
+  <button
+    mat-button
+    color="warn"
+    [disabled]="selection.selected.length < 1"
+    (click)="onDeleteBtnClick()"
+  >
+    Delete
+  </button>
+  <button mat-button color="primary" routerLink="create">Add</button>
+</div>
+<div class="customers-page__main mat-elevation-z8" *ngIf="dataSource">
+  <table
+    class="customers-page__table table-customers-page"
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    multiTemplateDataRows
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by email"
+      >
+        Email
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by name"
+      >
+        Name
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="customerTID">
+      <th mat-header-cell *matHeaderCellDef>CustomerTID</th>
+      <td mat-cell *matCellDef="let element">{{ element.customerTID }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by contactName"
+      >
+        Contact Name
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.contactName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactTelephone">
+      <th mat-header-cell *matHeaderCellDef>Contact Telephone</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.contactTelephone }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="creationDate">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by creationDate"
+      >
+        Creation Date
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.creationDate | date: "short" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [attr.colspan]="displayedColumns.length"
+      >
+        <div
+          class="table-customers-page__details details"
+          [@detailExpand]="
+            element == expandedElement ? 'expanded' : 'collapsed'
+          "
+          fxLayout="column"
+        >
+          <h2 fxFlexAlign="center">Customer softwares</h2>
+          <button
+            mat-button
+            color="accent"
+            routerLink="edit"
+            [queryParams]="{ id: element.id }"
+          >
+            Edit
+          </button>
+          <div
+            class="details__elements"
+            fxLayout="row"
+            fxLayoutAlign="start"
+            fxLayoutGap="20px"
+          >
+            <div
+              class="details__element"
+              *ngFor="let software of element.softwares"
+            >
+              <p>Name: {{ software.name }}</p>
+              <p>Platform: {{ software.platform }}</p>
+              <p *ngIf="software.type">Type: {{ software.softwareType }}</p>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let element; columns: displayedColumns"
+      class="table-customers-page__element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      class="table-customers-page__detail-row"
+    ></tr>
+  </table>
+  <app-loader
+    class="loader"
+    *ngIf="isLoadingSpinnerVisible$ | async"
+  ></app-loader>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

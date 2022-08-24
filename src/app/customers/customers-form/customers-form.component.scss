@@ -1,0 +1,21 @@
+.form {
+  &__title {
+    font-weight: bold;
+    font-size: 25px;
+    letter-spacing: 2px;
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.softwares-form {
+  &__button {
+    max-height: 50px;
+  }
+
+  &__item {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
