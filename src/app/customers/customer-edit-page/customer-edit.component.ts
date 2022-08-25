@@ -20,8 +20,8 @@ export class CustomerEditComponent {
     select(getCustomers),
     withLatestFrom(
       this.route.queryParamMap.pipe(
-        map((params: any): number => {
-          return params.params.id;
+        map((params): number => {
+          return +params.get('id')!;
         })
       )
     ),

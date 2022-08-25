@@ -26,8 +26,6 @@ import { getLoading } from '../shared/state/shared.selector';
   providers: [UnsubscribeService],
 })
 export class CustomersComponent implements OnInit {
-  @ViewChild(MatPaginator) private paginator: MatPaginator | null = null;
-  @ViewChild(MatSort) private sort: MatSort | null = null;
   constructor(
     private store: Store,
     private readonly unsubscribe: UnsubscribeService
@@ -46,6 +44,18 @@ export class CustomersComponent implements OnInit {
   public isLoadingSpinnerVisible$: Observable<boolean> = this.store.pipe(
     select(getLoading)
   );
+  private paginator: MatPaginator | null = null;
+  private sort: MatSort | null = null;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
   ngOnInit(): void {
     this.store.dispatch(loadCustomers());
     this.store
@@ -53,15 +63,14 @@ export class CustomersComponent implements OnInit {
         select(getCustomers),
         tap((customers: Customer[]) => {
           this.dataSource = new MatTableDataSource<Customer>(customers);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
+          this.setDataSourceAttributes();
         }),
         takeUntil(this.unsubscribe.destroy$)
       )
       .subscribe();
   }
 
-  public applyFilter(event: Event) {
+  public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -103,5 +112,12 @@ export class CustomersComponent implements OnInit {
     );
     this.store.dispatch(deleteCustomer({ customersIDs: selectedIds }));
     this.selection.clear();
+  }
+
+  private setDataSourceAttributes(): void {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 }

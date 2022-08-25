@@ -86,9 +86,10 @@ export class CustomersEffects {
       ofType(editCustomer),
       mergeMap((action) => {
         return this.httpService.editCustomer(action.customer).pipe(
-          map(() => {
+          map((response) => {
             const customer: Customer = {
               ...action.customer,
+              softwares: response.softwares,
             };
             return editCustomerSuccess({ customer });
           })
@@ -141,7 +142,7 @@ export class CustomersEffects {
       return this.actions$.pipe(
         ofType(deleteCustomerSuccess),
         tap(() => {
-          this.toastr.info('Customer was deleted');
+          this.toastr.info('Successful deletion');
         })
       );
     },

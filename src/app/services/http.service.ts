@@ -27,7 +27,7 @@ export class HttpService {
       .pipe(this.handleError());
   }
 
-  public deleteCustomer(elementsId: number[]) {
+  public deleteCustomer(elementsId: number[]): Observable<Customer> {
     return this.http
       .post<Customer>(`${this.url}/Customer/DeleteCustomers`, elementsId)
       .pipe(this.handleError());
@@ -41,7 +41,10 @@ export class HttpService {
 
   private handleError() {
     return catchError((err) => {
-      this.toastr.error(JSON.stringify(err), 'Oops. An error occurred');
+      this.toastr.error(
+        JSON.stringify(err),
+        'Oops. An error with http request occurred'
+      );
       return of(err);
     });
   }

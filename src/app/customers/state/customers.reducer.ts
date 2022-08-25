@@ -35,9 +35,14 @@ const _customersReducer = createReducer(
     };
   }),
   on(editCustomerSuccess, (state, action) => {
+    const updatedCustomers: Customer[] = state.customers.map(
+      (customer: Customer) => {
+        return action.customer.id === customer.id ? action.customer : customer;
+      }
+    );
     return {
       ...state,
-      customers: [...state.customers, action.customer],
+      customers: [...updatedCustomers],
     };
   })
 );

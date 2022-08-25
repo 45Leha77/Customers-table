@@ -1,0 +1,11 @@
+<section class="create-page">
+  <div class="create-page__container">
+    <div class="create-page__top" fxLayoutAlign="space-between center">
+      <button mat-raised-button color="accent" routerLink="../">Back</button>
+      <h1 class="create-page__title">Creating customer</h1>
+    </div>
+    <app-customers-form
+      (submit)="onCustomersFormSubmit($event)"
+    ></app-customers-form>
+  </div>
+</section>

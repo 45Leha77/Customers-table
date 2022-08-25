@@ -1,3 +1,11 @@
+@import "src/assets/style/variables";
+
+.customers-page {
+  &__container {
+    padding: $pagesContainer;
+  }
+}
+
 .table-customers-page {
   width: 100%;
   mat-form-field {
@@ -12,6 +20,9 @@
 
   &__detail-row {
     height: 0;
+  }
+  tr {
+    cursor: pointer;
   }
 }
 

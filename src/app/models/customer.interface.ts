@@ -1,21 +1,21 @@
 export interface CustomerSoftware {
-  name?: string | null;
-  platform?: string | null;
-  softwareId?: string | null;
-  softwareType?: string | null;
-  subscriptionEnded?: string | null;
-  subscriptionStarted?: string | null;
+  name?: string;
+  platform?: string;
+  softwareId?: string;
+  softwareType?: string;
+  subscriptionEnded?: string;
+  subscriptionStarted?: string;
 }
 
 export interface Customer {
   id?: number;
-  contactName?: string | null;
-  contactTelephone?: string | null;
-  creationDate?: string | null;
-  customerTID?: string | null;
-  email?: string | null;
-  name?: string | null;
-  softwares?: CustomerSoftware[] | null;
-  softwareIds?: Number[] | null;
-  notes?: string | null;
+  contactName?: string;
+  contactTelephone?: string;
+  creationDate?: string;
+  customerTID?: string;
+  email?: string;
+  name?: string;
+  softwares?: CustomerSoftware[];
+  softwareIds?: Number[];
+  notes?: string;
 }

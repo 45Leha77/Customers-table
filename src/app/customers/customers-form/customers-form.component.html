@@ -3,7 +3,7 @@
   [formGroup]="form"
   (ngSubmit)="onFormSubmit($event)"
   fxLayout="column"
-  fxLayoutGap="10px"
+  fxLayoutGap="5px"
 >
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
@@ -39,10 +39,10 @@
     </button>
     <mat-slider
       thumbLabel
-      tickInterval="1000"
       step="1"
       min="1"
       max="10"
+      aria-label="software number"
       #softwaresInput
     ></mat-slider>
     <div fxLayout="column">

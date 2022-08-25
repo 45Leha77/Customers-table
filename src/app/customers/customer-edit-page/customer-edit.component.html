@@ -1,0 +1,12 @@
+<section class="edit-page">
+  <div class="edit-page__container">
+    <div class="edit-page__top" fxLayoutAlign="space-between center">
+      <button mat-raised-button color="accent" routerLink="../">Back</button>
+      <h1 class="edit-page__title">Editing customer</h1>
+    </div>
+    <app-customers-form
+      [customerData]="customer"
+      (submit)="onCustomersFormSubmit($event)"
+    ></app-customers-form>
+  </div>
+</section>

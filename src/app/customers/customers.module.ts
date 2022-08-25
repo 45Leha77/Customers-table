@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -19,13 +21,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomersComponent } from './customers.component';
 import { SharedModule } from '../shared/shared.module';
-import { CustomerCreateComponent } from './customer-create/customer-create.component';
-import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomerCreateComponent } from './customer-create-page/customer-create.component';
+import { CustomerEditComponent } from './customer-edit-page/customer-edit.component';
 import { CustomersFormComponent } from './customers-form/customers-form.component';
 
 @NgModule({

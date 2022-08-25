@@ -1,12 +1,13 @@
 import {
   animate,
+  AnimationTriggerMetadata,
   state,
   style,
   transition,
   trigger,
 } from '@angular/animations';
 
-export const detailExpand = trigger('detailExpand', [
+export const detailExpand: AnimationTriggerMetadata = trigger('detailExpand', [
   state('collapsed', style({ height: '0px', minHeight: '0' })),
   state('expanded', style({ height: '*' })),
   transition(
